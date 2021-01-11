@@ -1,6 +1,6 @@
 SOURCE		:=	source
 INCLUDE		:=	include
-CPPFILES    :=  $(wildcard $(SOURCE)/*.cpp)
+CPPFILES	:=	$(wildcard $(SOURCE)/*.cpp)
 
 # Windows
 ifeq ($(OS),Windows_NT)
