@@ -1,22 +1,19 @@
-BUILD  = go build
+TARGET	:=	disas
 
-# Windows
+BUILD = go build
+
 ifeq ($(OS),Windows_NT)
-	TARGET	:=	$(notdir $(CURDIR)).exe
+    EXT :=  .exe
+else
+    EXT :=  .out
 endif
 
-# Linux
-ifeq ($(shell uname),Linux)
-	TARGET	:=	$(notdir $(CURDIR)).out
-endif
-
-# Others
-TARGET		?=	$(notdir $(CURDIR))
-
-all: clean $(TARGET)
+all: $(TARGET)$(EXT)
 
 clean:
-	@$(RM) $(TARGET)
+	@$(RM) $(TARGET)$(EXT)
 
-$(TARGET):
+re: clean all
+
+$(TARGET)$(EXT):
 	@$(BUILD) -o $@

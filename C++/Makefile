@@ -1,26 +1,20 @@
+TARGET		:=	disas
 SOURCE		:=	source
 INCLUDE		:=	include
 CPPFILES	:=	$(wildcard $(SOURCE)/*.cpp)
 
-# Windows
 ifeq ($(OS),Windows_NT)
-	TARGET	:=	$(notdir $(CURDIR)).exe
+	EXT	:=	.exe
+else
+	EXT	:=	.out
 endif
-
-# Linux
-ifeq ($(shell uname),Linux)
-	TARGET	:=	$(notdir $(CURDIR)).out
-endif
-
-# Others
-TARGET		?=	$(notdir $(CURDIR))
 
 all: $(TARGET)
 
 clean:
-	@$(RM) $(TARGET)
+	@$(RM) $(TARGET)$(EXT)
 
 re: clean all
 
 $(TARGET): $(CPPFILES)
-	@$(CXX) -g -I $(INCLUDE) $^ -o $@
+	@$(CXX) -g -I $(INCLUDE) $^ -o $@$(EXT)
