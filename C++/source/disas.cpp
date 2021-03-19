@@ -131,7 +131,10 @@ void data_proc(int code, std::string cond){
         return;
     }
 
-    if(cmp_mode){
+    if(bx_mode){
+        std::cout << "bx" << cond << " " << Rm << std::endl;
+    }
+    else if(cmp_mode){
         if(cmd == "mrs")
             std::cout << cmd << " " << Rd << ", " << (psr ? "spsr" : "cpsr") << std::endl;
         else if(cmd == "msr")
@@ -146,9 +149,6 @@ void data_proc(int code, std::string cond){
         std::cout << cmd << (s_bit ? "s" : "") << cond << " " << Rd << ", " \
         << ((code >> 23) & 1 ? (Rn + ", ") : "") << Rm << ", " << Rs \
         << (cmd == "mla" ? (", " + Rn) : "") << std::endl;
-    }
-	else if(bx_mode){
-        std::cout << "bx" << cond << " " << Rm << std::endl;
     }
     else{
         std::cout << cmd << (s_bit ? "s" : "") << cond << " " << Rd << ", " \

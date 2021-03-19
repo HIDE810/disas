@@ -101,6 +101,12 @@ func DataProc(code uint32, cond string, Rm string, Rs string, Rd string, Rn stri
         return
     }
 
+    // Branch and exchange instruction set
+    if bx_mode {
+        fmt.Printf("bx%v %v\n", cond, Rm)
+        return
+    }
+
     // Compare
     if cmp_mode {
         if cmd == "mrs" {
@@ -123,12 +129,6 @@ func DataProc(code uint32, cond string, Rm string, Rs string, Rd string, Rn stri
         } else {
             fmt.Printf("%v%v%v %v, %v, %v, %v\n", cmd, CheckBit(s_bit, "s", ""), cond, Rd, Rn, Rm, Rs)
         }
-        return
-    }
-
-    // Branch and exchange instruction set
-    if bx_mode {
-        fmt.Printf("bx%v %v\n", cond, Rm)
         return
     }
 
