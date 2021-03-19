@@ -4,17 +4,16 @@
 
 std::string Rm, Rs, Rd, Rn;
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
 
     int code;
 
-    if(argc > 1){
-        sscanf(argv[1], "%x", &code);
+    if(argc != 2) {
+        std::cout << "Error: Bad argument." << std::endl;
+        return -1;
     }
-    else{
-        std::cout << "Error: No argument." << std::endl;
-        return 1;
-    }
+
+    sscanf(argv[1], "%x", &code);
     
     Rm = cpu_reg(code);
     Rs = cpu_reg(code >> 8);
